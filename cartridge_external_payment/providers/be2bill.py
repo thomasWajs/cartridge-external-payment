@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
 
-from django_be2bill.sdk import Be2BillForm
+from be2bill_sdk import Be2BillForm
 from cartridge_external_payment.providers.base import PaymentProvider
 
 class Be2BillProvider(PaymentProvider):

@@ -1,4 +1,4 @@
-cartridge-vat
+cartridge-external-payment
 =============
 
 Integration of Cartridge/Mezzanine with payment providers that requires to redirect the
