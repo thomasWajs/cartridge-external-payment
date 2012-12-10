@@ -1,0 +1,16 @@
+{% extends "shop/checkout.html" %}
+{% load i18n %}
+
+{%block before_checkout_form%}
+<form action="{{start_payment_form.get_form_target}}" method="POST" id="payment-form" class="form-horizontal form-shop span8"> 
+
+<p>{%trans  "You will be redirected to the secure platform of our payment partner to complete the order" %}</p>
+{{start_payment_form.render_form_inputs|safe}}
+
+<input type="submit" class="btn btn-large btn-primary" value="{% trans "Start payment" %}">
+</form>
+{% endblock %}
+
+{% block fields %}
+{{ form }}
+{% endblock %}
