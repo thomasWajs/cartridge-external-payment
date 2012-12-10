@@ -65,7 +65,7 @@ def checkout_steps(request):
                     checkout_errors.append(e)
                 form.set_discount()
 
-            # FINAL CHECKOUT STEP has been removed, has payment is now
+            # FINAL CHECKOUT STEP has been removed, as payment is now
             # handled by the external provider
 
             # If any checkout errors, assign them to a new form and
@@ -92,7 +92,6 @@ def checkout_steps(request):
         order = form.save(commit=False)
         order.setup(request)
         context['start_payment_form'] = provider.get_start_payment_form(request, order)
-        print context['start_payment_form'].get_form_target()
     response = render(request, template, context)
 
     if step == checkout.CHECKOUT_STEP_PAYMENT:
