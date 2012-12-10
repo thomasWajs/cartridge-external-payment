@@ -9,8 +9,9 @@ class Be2BillProvider(PaymentProvider):
         total = Decimal(order.total * 100).quantize(Decimal('0'))
         fullname = order.billing_detail_first_name + ' ' + \
                     order.billing_detail_last_name
+        client_ident = "{} ({})".format(fullname, order.billing_detail_email)
         return Be2BillForm(operation_type="payment",
-                           client_ident=request.user.id,
+                           client_ident=client_ident,
                            description="X",
                            order_id=order.id,
                            amount=total,

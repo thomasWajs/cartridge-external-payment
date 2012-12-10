@@ -114,9 +114,15 @@ def finalize_order(request):
     order_id = provider.get_order_id(request)
     order = Order.objects.get(pk=order_id)
     #Order is already completed
-#    if order.payment_done:
-#        return
+    if order.payment_done:
+        return
 
+    #Simulate the cart for the order.complete, and order_handler that needs it
+    try:
+        cart_id = provider.get_cart_id(request)
+        request.cart = Cart.objects.get(id=cart_id)
+    except (NotImplementedError, Cart.DoesNotExist, TypeError):
+        pass
 
     #Recreate an order form for the order handler
     data = checkout.initial_order_data(request)
@@ -146,12 +152,5 @@ def payment_notification(request):
     '''View that the external payment provider calls when a payment is succesful.
     Retrieve and the order, then finalize it as in standard cartridge checkout module.
     '''
-    #try to simulate the cart for the order_handler that needs it
-    try:
-        cart_id = provider.get_cart_id(request)
-        request.cart = Cart.objects.get(id=cart_id)
-    except (NotImplementedError, Cart.DoesNotExist, TypeError):
-        pass
-
     finalize_order(request)
     return HttpResponse()

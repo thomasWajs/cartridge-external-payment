@@ -26,7 +26,18 @@ Set the alternative OrderForm class for the checkout process (see cartridge docu
 SHOP_CHECKOUT_FORM_CLASS = 'cartridge_external_payment.forms.ExternalPaymentOrderForm'
 ```
 
-This allow to hide payment fields during the payment step at checkout.
+### Order Form
+
+Add an extra field to the Order, so we can follow which order has been payed succesfully
+
+```
+		(
+            "cartridge.shop.models.Order.payment_done",
+            "BooleanField",
+            (u"Payment effectué",),
+            {"default": False},
+        ),
+```
 
 ### Urls
 
